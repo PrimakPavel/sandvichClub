@@ -9,6 +9,7 @@
 
     <!-- Content descriptions-->
     <string name="sandwich_picture_content_description">Sandwich picture</string>
+    <string name="sandwich_error_picture_content_description">Sandwich picture load error</string>
 
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
