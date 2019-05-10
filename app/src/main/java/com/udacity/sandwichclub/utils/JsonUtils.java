@@ -28,24 +28,18 @@ public class JsonUtils {
 
             if (sandwichJsonObject.has(NAME)) {
                 JSONObject nameJsonObject = sandwichJsonObject.getJSONObject(NAME);
-                if (nameJsonObject.has(MAIN_NAME)) {
-                    sandwich.setMainName(nameJsonObject.getString(MAIN_NAME));
-                }
+
+                sandwich.setMainName(nameJsonObject.optString(MAIN_NAME));
+
                 if (nameJsonObject.has(ALSO_KNOWN_AS)) {
                     JSONArray alsoKnownAsJsonArray = nameJsonObject.getJSONArray(ALSO_KNOWN_AS);
                     sandwich.setAlsoKnownAs(convertJsonArrayToStringList(alsoKnownAsJsonArray));
                 }
             }
+            sandwich.setPlaceOfOrigin(sandwichJsonObject.optString(PLACE_OF_ORIGIN));
+            sandwich.setDescription(sandwichJsonObject.optString(DESCRIPTION));
+            sandwich.setImage(sandwichJsonObject.optString(IMAGE));
 
-            if (sandwichJsonObject.has(PLACE_OF_ORIGIN)) {
-                sandwich.setPlaceOfOrigin(sandwichJsonObject.getString(PLACE_OF_ORIGIN));
-            }
-            if (sandwichJsonObject.has(DESCRIPTION)) {
-                sandwich.setDescription(sandwichJsonObject.getString(DESCRIPTION));
-            }
-            if (sandwichJsonObject.has(IMAGE)) {
-                sandwich.setImage(sandwichJsonObject.getString(IMAGE));
-            }
             if (sandwichJsonObject.has(INGREDIENTS)) {
                 JSONArray ingredientsJsonArray = sandwichJsonObject.getJSONArray(INGREDIENTS);
                 sandwich.setIngredients(convertJsonArrayToStringList(ingredientsJsonArray));
@@ -77,10 +71,10 @@ public class JsonUtils {
     }
 
     /*{"name":
-        {"mainName":"Ham and cheese sandwich","alsoKnownAs":["Some info about"]},
-        "placeOfOrigin":"",
-            "description":"A ham and cheese sandwich is a common type of sandwich. It is made by putting cheese and sliced ham between two slices of bread. The bread is sometimes buttered and/or toasted. Vegetables            like lettuce, tomato, onion or pickle slices can also be included. Various kinds of mustard and mayonnaise are also common.",
-            "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG",
-            "ingredients":["Sliced bread","Cheese","Ham"]
+            {"mainName":"Ham and cheese sandwich","alsoKnownAs":["Some info about"]},
+       "placeOfOrigin":"",
+       "description":"A ham and cheese sandwich is a common type of sandwich. It is made by putting cheese and sliced ham between two slices of bread. The bread is sometimes buttered and/or toasted. Vegetables like lettuce, tomato, onion or pickle slices can also be included. Various kinds of mustard and mayonnaise are also common.",
+       "image":"https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Grilled_ham_and_cheese_014.JPG/800px-Grilled_ham_and_cheese_014.JPG",
+       "ingredients":["Sliced bread","Cheese","Ham"]
     }*/
 }

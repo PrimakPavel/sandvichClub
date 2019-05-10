@@ -2,7 +2,6 @@ package com.udacity.sandwichclub;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,35 +9,52 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class DetailActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "extra_position";
     public static final String LIST_ELEMENTS_SEPARATOR = ", ";
     private static final int DEFAULT_POSITION = -1;
-    private TextView mAlsoKnownAsTv;
-    private TextView mAlsoKnownAsLabelTv;
-    private TextView mIngredientsTv;
-    private TextView mIngredientsLabelTv;
-    private TextView mPlaceOfOriginTv;
-    private TextView mPlaceOfOriginLabelTv;
-    private TextView mDescriptionTv;
-    private TextView mDescriptionLabelTv;
+    @BindView(R.id.also_known_tv)
+    TextView mAlsoKnownAsTv;
+    @BindView(R.id.also_known_label_tv)
+    TextView mAlsoKnownAsLabelTv;
 
-    private ProgressBar mProgressBar;
-    private ImageView mImageLoadErrorIv;
+    @BindView(R.id.ingredients_tv)
+    TextView mIngredientsTv;
+    @BindView(R.id.detail_ingredients_label_tv)
+    TextView mIngredientsLabelTv;
+
+    @BindView(R.id.origin_tv)
+    TextView mPlaceOfOriginTv;
+    @BindView(R.id.detail_place_of_origin_label_tv)
+    TextView mPlaceOfOriginLabelTv;
+
+    @BindView(R.id.description_tv)
+    TextView mDescriptionTv;
+    @BindView(R.id.detail_description_label_tv)
+    TextView mDescriptionLabelTv;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
+
+    @BindView(R.id.image_load_error_iv)
+    ImageView mImageLoadErrorIv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
+        ButterKnife.bind(this);
         ImageView posterIv = findViewById(R.id.image_iv);
-
-        findViewsById();
 
         Intent intent = getIntent();
         if (intent == null) {
@@ -101,23 +117,6 @@ public class DetailActivity extends AppCompatActivity {
         Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
     }
 
-    private void findViewsById() {
-        mAlsoKnownAsTv = findViewById(R.id.also_known_tv);
-        mAlsoKnownAsLabelTv = findViewById(R.id.also_known_label_tv);
-
-        mIngredientsTv = findViewById(R.id.ingredients_tv);
-        mIngredientsLabelTv = findViewById(R.id.detail_ingredients_label_tv);
-
-        mPlaceOfOriginTv = findViewById(R.id.origin_tv);
-        mPlaceOfOriginLabelTv = findViewById(R.id.detail_place_of_origin_label_tv);
-
-        mDescriptionTv = findViewById(R.id.description_tv);
-        mDescriptionLabelTv = findViewById(R.id.detail_description_label_tv);
-
-        mProgressBar = findViewById(R.id.progress_bar);
-        mImageLoadErrorIv = findViewById(R.id.image_load_error_iv);
-
-    }
 
     private void populateUI(Sandwich sandwich) {
         //"Also known as" ROW
